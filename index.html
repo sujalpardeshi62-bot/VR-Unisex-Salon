@@ -3,18 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VR Unisex Salon | वर यूनिसेक्स सैलून — Premium Beauty & Grooming</title>
-    <meta name="description" content="VR Unisex Salon - Luxury grooming crafted for modern elegance. Expert stylists, premium products, world-class beauty services in Kalyan East, Maharashtra.">
+    <title>VR Salon — Premium Beauty & Grooming</title>
+    <meta name="description" content="VR Salon - Luxury grooming crafted for modern elegance. Expert stylists, premium products, world-class beauty services in Kalyan East, Maharashtra.">
+    <link rel="icon" type="image/png" href="img/logo1.png">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        :root {
-            --gold:#D4AF37;--gold-light:#F4E5A3;--gold-dark:#B8960C;
-            --black:#0A0A0A;--black-light:#111;--black-medium:#1A1A1A;
-            --white:#FFF;--gray:#888;
-            --glass-bg:rgba(255,255,255,0.04);--glass-border:rgba(212,175,55,0.12);
-            --gradient-gold:linear-gradient(135deg,#D4AF37,#F4E5A3,#D4AF37);
-        }
+        :root{--gold:#D4AF37;--gold-light:#F4E5A3;--gold-dark:#B8960C;--black:#0A0A0A;--black-light:#111;--black-medium:#1A1A1A;--white:#FFF;--gray:#888;--glass-bg:rgba(255,255,255,0.04);--glass-border:rgba(212,175,55,0.12);--gradient-gold:linear-gradient(135deg,#D4AF37,#F4E5A3,#D4AF37)}
         *{margin:0;padding:0;box-sizing:border-box}
         html{scroll-behavior:smooth;overflow-x:hidden}
         body{font-family:'Inter',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased}
@@ -22,19 +17,22 @@
         ::-webkit-scrollbar{width:5px}
         ::-webkit-scrollbar-track{background:var(--black)}
         ::-webkit-scrollbar-thumb{background:var(--gold-dark);border-radius:3px}
+        img{max-width:100%;height:auto;display:block}
 
         .scroll-progress{position:fixed;top:0;left:0;height:3px;z-index:100000;background:var(--gradient-gold);width:0%;transition:width 0.1s linear}
 
+        /* LOADER */
         .loading-screen{position:fixed;inset:0;background:var(--black);display:flex;align-items:center;justify-content:center;z-index:999999;transition:all 1s ease}
         .loading-screen.hidden{opacity:0;pointer-events:none}
         .loader-content{text-align:center}
-        .loader-logo{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;background:var(--gradient-gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:pulse 1.5s ease-in-out infinite}
-        .loader-bar{width:180px;height:2px;background:var(--black-medium);margin:25px auto 0;border-radius:2px;overflow:hidden}
+        .loader-logo-img{width:80px;height:80px;object-fit:contain;margin:0 auto 15px;animation:pulse 1.5s ease-in-out infinite}
+        .loader-bar{width:180px;height:2px;background:var(--black-medium);margin:15px auto 0;border-radius:2px;overflow:hidden}
         .loader-fill{height:100%;background:var(--gradient-gold);width:0%;animation:fill 2s ease forwards}
         .loader-sub{font-family:'Montserrat',sans-serif;font-size:.6rem;letter-spacing:4px;color:var(--gold);margin-top:15px;opacity:.6;text-transform:uppercase}
         @keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
         @keyframes fill{to{width:100%}}
 
+        /* TOASTS */
         .toast-container{position:fixed;top:90px;right:20px;z-index:999998;display:flex;flex-direction:column;gap:10px;pointer-events:none}
         .toast{pointer-events:all;display:flex;align-items:center;gap:12px;padding:16px 22px;border-radius:2px;backdrop-filter:blur(20px);border:1px solid rgba(212,175,55,0.15);min-width:300px;max-width:420px;transform:translateX(120%);opacity:0;transition:all .4s cubic-bezier(.25,.46,.45,.94);font-size:.82rem;line-height:1.4}
         .toast.show{transform:translateX(0);opacity:1}
@@ -44,16 +42,15 @@
         .toast.info{background:rgba(212,175,55,0.1);border-color:rgba(212,175,55,0.2);color:var(--gold)}
         .toast i{font-size:1.1rem;flex-shrink:0}
         .toast-close{margin-left:auto;background:none;border:none;color:inherit;cursor:pointer;opacity:.6;font-size:.8rem;padding:4px}
-        .toast-close:hover{opacity:1}
 
         /* NAVBAR */
         .navbar{position:fixed;top:0;left:0;width:100%;z-index:9999;padding:18px 50px;display:flex;align-items:center;justify-content:space-between;transition:all .4s ease}
         .navbar.scrolled{padding:10px 50px;background:rgba(10,10,10,0.92);backdrop-filter:blur(30px);border-bottom:1px solid rgba(212,175,55,0.08)}
         .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
-        .nav-logo{width:42px;height:42px;background:var(--gradient-gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1rem;font-weight:800;color:var(--black);flex-shrink:0}
+        .nav-logo-img{width:42px;height:42px;object-fit:contain;border-radius:50%;flex-shrink:0}
         .nav-brand-text{display:flex;flex-direction:column}
         .nav-brand-name{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:#fff;white-space:nowrap}
-        .nav-brand-hindi{font-size:.55rem;color:var(--gold);letter-spacing:2px}
+        .nav-brand-sub{font-size:.5rem;color:var(--gold);letter-spacing:2px;text-transform:uppercase;font-family:'Montserrat',sans-serif;font-weight:500}
         .nav-menu{display:flex;align-items:center;gap:30px;list-style:none}
         .nav-link{font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:#fff;text-decoration:none;position:relative;transition:color .3s}
         .nav-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width .3s}
@@ -66,7 +63,6 @@
         .cart-badge.visible{display:flex}
         .nav-book-btn{padding:9px 22px;border:1px solid var(--gold);color:var(--gold);font-family:'Montserrat',sans-serif;font-size:.65rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;background:transparent;transition:all .3s;text-decoration:none}
         .nav-book-btn:hover{background:var(--gold);color:var(--black)}
-
         .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;z-index:10001;position:relative;width:40px;height:40px;align-items:center;justify-content:center}
         .hamburger span{width:22px;height:1.5px;background:var(--gold);transition:all .4s cubic-bezier(.25,.46,.45,.94);display:block;position:absolute}
         .hamburger span:nth-child(1){top:12px}
@@ -75,12 +71,18 @@
         .hamburger.active span:nth-child(1){top:19px;transform:rotate(45deg)}
         .hamburger.active span:nth-child(2){opacity:0;transform:scaleX(0)}
         .hamburger.active span:nth-child(3){top:19px;transform:rotate(-45deg)}
-
         .mobile-menu{position:fixed;inset:0;background:rgba(10,10,10,0.98);backdrop-filter:blur(40px);z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:25px;opacity:0;visibility:hidden;transition:all .45s cubic-bezier(.25,.46,.45,.94)}
         .mobile-menu.active{opacity:1;visibility:visible}
-        .mobile-menu a{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:600;color:#fff;text-decoration:none;transition:all .3s;opacity:0;transform:translateY(20px)}
+        .mobile-menu a{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:600;color:#fff;text-decoration:none;transition:all .35s ease;opacity:0;transform:translateY(20px)}
         .mobile-menu.active a{opacity:1;transform:translateY(0)}
         .mobile-menu a:hover{color:var(--gold)}
+        .mobile-menu.active a:nth-child(1){transition-delay:.05s}
+        .mobile-menu.active a:nth-child(2){transition-delay:.1s}
+        .mobile-menu.active a:nth-child(3){transition-delay:.15s}
+        .mobile-menu.active a:nth-child(4){transition-delay:.2s}
+        .mobile-menu.active a:nth-child(5){transition-delay:.25s}
+        .mobile-menu.active a:nth-child(6){transition-delay:.3s}
+        .mobile-menu.active a:nth-child(7){transition-delay:.35s}
 
         /* HERO */
         .hero{position:relative;width:100%;height:100vh;min-height:600px;overflow:hidden;display:flex;align-items:center;justify-content:center}
@@ -94,6 +96,8 @@
         .hero-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(212,175,55,0.06) 0%,transparent 60%);animation:glow 6s ease-in-out infinite alternate}
         @keyframes glow{0%{transform:translate(-50%,-50%) scale(1);opacity:.4}100%{transform:translate(-50%,-50%) scale(1.3);opacity:1}}
         .hero-content{position:relative;z-index:10;text-align:center;max-width:850px;padding:0 25px}
+        .hero-logo-wrap{margin:0 auto 20px;opacity:0;animation:fadeUp .8s ease .3s forwards}
+        .hero-logo-img{width:90px;height:90px;object-fit:contain;margin:0 auto}
         .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 22px;border:1px solid rgba(212,175,55,0.25);border-radius:50px;font-family:'Montserrat',sans-serif;font-size:.58rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gold);backdrop-filter:blur(10px);background:rgba(212,175,55,0.04);margin-bottom:28px;opacity:0;animation:fadeUp .8s ease .5s forwards}
         .badge-dot{width:6px;height:6px;background:#00ff88;border-radius:50%;animation:blink 2s infinite}
         @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
@@ -132,9 +136,9 @@
         .about{background:var(--black-light)}
         .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;max-width:1100px;margin:0 auto}
         .about-visual{position:relative}
-        .about-img{width:100%;height:480px;background:linear-gradient(135deg,var(--black-medium),#151520);border:1px solid rgba(212,175,55,0.1);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-        .about-img::before{content:'';position:absolute;top:-15px;right:-15px;width:100%;height:100%;border:1px solid rgba(212,175,55,0.15);z-index:-1}
-        .about-img-icon{font-size:4rem;color:var(--gold);opacity:.15}
+        .about-img-box{width:100%;height:480px;background:linear-gradient(135deg,var(--black-medium),#151520);border:1px solid rgba(212,175,55,0.1);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+        .about-img-box::before{content:'';position:absolute;top:-15px;right:-15px;width:100%;height:100%;border:1px solid rgba(212,175,55,0.15);z-index:-1}
+        .about-logo-img{width:140px;height:140px;object-fit:contain;opacity:.3}
         .about-badge{position:absolute;bottom:-15px;right:-15px;width:120px;height:120px;background:var(--gradient-gold);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:5}
         .about-badge-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--black)}
         .about-badge-txt{font-family:'Montserrat',sans-serif;font-size:.5rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--black)}
@@ -173,7 +177,7 @@
         /* SERVICE MODAL */
         .svc-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(12px);z-index:99999;display:none;align-items:center;justify-content:center;opacity:0;transition:opacity .35s}
         .svc-modal-overlay.show{display:flex;opacity:1}
-        .svc-modal{background:rgba(17,17,17,0.95);backdrop-filter:blur(30px);border:1px solid rgba(212,175,55,0.12);max-width:520px;width:92%;max-height:90vh;overflow-y:auto;padding:0;position:relative;transform:scale(0.9) translateY(20px);transition:all .35s cubic-bezier(.25,.46,.45,.94)}
+        .svc-modal{background:rgba(17,17,17,0.95);backdrop-filter:blur(30px);border:1px solid rgba(212,175,55,0.12);max-width:520px;width:92%;max-height:90vh;overflow-y:auto;position:relative;transform:scale(0.9) translateY(20px);transition:all .35s cubic-bezier(.25,.46,.45,.94)}
         .svc-modal-overlay.show .svc-modal{transform:scale(1) translateY(0)}
         .svc-modal::-webkit-scrollbar{width:3px}
         .svc-modal::-webkit-scrollbar-thumb{background:var(--gold-dark)}
@@ -191,8 +195,8 @@
         .mf-group{display:flex;flex-direction:column;gap:5px}
         .mf-group.full{grid-column:span 2}
         .mf-label{font-family:'Montserrat',sans-serif;font-size:.58rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold)}
-        .mf-input,.mf-select,.mf-textarea{width:100%;padding:11px 14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);color:#fff;font-family:'Inter',sans-serif;font-size:.82rem;outline:none;transition:all .3s}
-        .mf-input:focus,.mf-select:focus,.mf-textarea:focus{border-color:var(--gold);background:rgba(212,175,55,0.02);box-shadow:0 0 12px rgba(212,175,55,0.06)}
+        .mf-input,.mf-textarea{width:100%;padding:11px 14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);color:#fff;font-family:'Inter',sans-serif;font-size:.82rem;outline:none;transition:all .3s}
+        .mf-input:focus,.mf-textarea:focus{border-color:var(--gold);background:rgba(212,175,55,0.02);box-shadow:0 0 12px rgba(212,175,55,0.06)}
         .mf-textarea{resize:vertical;min-height:65px}
         .m-time-slots{display:flex;flex-wrap:wrap;gap:6px}
         .m-time-slot{padding:6px 13px;border:1px solid rgba(255,255,255,0.08);background:transparent;color:rgba(255,255,255,0.5);font-family:'Inter',sans-serif;font-size:.7rem;cursor:pointer;transition:all .3s}
@@ -200,7 +204,7 @@
         .modal-btns{display:flex;gap:10px;margin-top:18px}
         .modal-btns button{flex:1}
 
-        /* CART SIDEBAR */
+        /* CART */
         .cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:99997;display:none;opacity:0;transition:opacity .3s}
         .cart-overlay.show{display:block;opacity:1}
         .cart-sidebar{position:fixed;top:0;right:-400px;width:380px;max-width:92vw;height:100vh;background:rgba(12,12,12,0.98);backdrop-filter:blur(20px);border-left:1px solid rgba(212,175,55,0.1);z-index:99998;transition:right .4s ease;display:flex;flex-direction:column}
@@ -209,7 +213,7 @@
         .cart-header h3{font-family:'Playfair Display',serif;font-size:1.15rem}
         .cart-close{background:none;border:none;color:#fff;font-size:1.1rem;cursor:pointer;padding:5px}
         .cart-items{flex:1;overflow-y:auto;padding:15px 25px}
-        .cart-item{display:flex;align-items:center;justify-content:space-between;padding:15px 0;border-bottom:1px solid rgba(255,255,255,0.04);animation:fadeUp .3s ease}
+        .cart-item{display:flex;align-items:center;justify-content:space-between;padding:15px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
         .cart-item-info h4{font-size:.82rem;margin-bottom:3px}
         .cart-item-info span{font-size:.68rem;color:var(--gold)}
         .cart-item-remove{background:none;border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.4);width:28px;height:28px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.55rem;transition:all .3s}
@@ -233,25 +237,24 @@
         .why-card h4{font-family:'Playfair Display',serif;font-size:.95rem;margin-bottom:8px}
         .why-card p{font-size:.72rem;color:rgba(255,255,255,0.45);line-height:1.6}
 
-        /* COUNTERS MARQUEE */
+        /* COUNTERS */
         .counters-section{border-top:1px solid rgba(212,175,55,0.08);border-bottom:1px solid rgba(212,175,55,0.08);overflow:hidden;padding:0}
         .counter-marquee{overflow:hidden;padding:35px 0}
         .counter-track{display:flex;gap:60px;width:max-content;animation:marquee 30s linear infinite}
-        .counter-item{flex-shrink:0;text-align:center;min-width:180px;display:flex;align-items:center;gap:15px}
+        .counter-item{flex-shrink:0;min-width:180px;display:flex;align-items:center;gap:15px}
         .counter-num{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;color:var(--gold);white-space:nowrap}
         .counter-label{font-family:'Montserrat',sans-serif;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);text-align:left}
         .counter-dot{width:4px;height:4px;background:var(--gold);border-radius:50%;opacity:.3;flex-shrink:0}
 
-        /* GALLERY */
+        /* GALLERY DESKTOP */
         .gallery{background:var(--black)}
-        .gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:250px;gap:12px;max-width:1300px;margin:0 auto}
+        .gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:280px;gap:12px;max-width:1300px;margin:0 auto}
         .gallery-item{position:relative;overflow:hidden;cursor:pointer;border:1px solid rgba(212,175,55,0.06)}
         .gallery-item:nth-child(1){grid-row:span 2}
         .gallery-item:nth-child(4){grid-column:span 2}
         .gallery-item:nth-child(7){grid-row:span 2}
-        .gallery-bg{width:100%;height:100%;background:linear-gradient(135deg,var(--black-medium),#151520);display:flex;align-items:center;justify-content:center;transition:transform .5s}
-        .gallery-item:hover .gallery-bg{transform:scale(1.08)}
-        .gallery-bg i{font-size:2.5rem;color:var(--gold);opacity:.12}
+        .gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;display:block}
+        .gallery-item:hover img{transform:scale(1.08)}
         .gallery-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,0.9) 0%,transparent 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:20px;opacity:0;transition:opacity .3s}
         .gallery-item:hover .gallery-ov{opacity:1}
         .gallery-ov h4{font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:3px}
@@ -259,17 +262,20 @@
         .gallery-expand{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(0.5);width:45px;height:45px;border:2px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold);opacity:0;transition:all .3s}
         .gallery-item:hover .gallery-expand{opacity:1;transform:translate(-50%,-50%) scale(1)}
 
-        /* MOBILE GALLERY CAROUSEL */
+        /* GALLERY MOBILE CAROUSEL */
         .gallery-mobile-carousel{display:none}
 
         /* LIGHTBOX */
         .lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:99999;display:none;align-items:center;justify-content:center;opacity:0;transition:opacity .3s}
         .lightbox.show{display:flex;opacity:1}
-        .lb-close{position:absolute;top:25px;right:25px;width:45px;height:45px;border:1px solid rgba(255,255,255,0.15);background:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s}
+        .lb-close{position:absolute;top:25px;right:25px;width:45px;height:45px;border:1px solid rgba(255,255,255,0.15);background:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;z-index:2}
         .lb-close:hover{border-color:var(--gold);color:var(--gold)}
-        .lb-img{width:450px;max-width:85vw;height:350px;background:linear-gradient(135deg,var(--black-medium),#151520);border:1px solid rgba(212,175,55,0.15);display:flex;align-items:center;justify-content:center;flex-direction:column}
-        .lb-img i{font-size:3rem;color:var(--gold);opacity:.2;margin-bottom:15px}
-        .lb-img span{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--gold);opacity:.4}
+        .lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:45px;height:45px;border:1px solid rgba(255,255,255,0.15);background:rgba(0,0,0,0.5);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;font-size:1rem;z-index:2}
+        .lb-nav:hover{border-color:var(--gold);color:var(--gold)}
+        .lb-prev{left:20px}
+        .lb-next{right:20px}
+        .lb-img-container{max-width:85vw;max-height:80vh;display:flex;align-items:center;justify-content:center;position:relative}
+        .lb-img-container img{max-width:100%;max-height:80vh;object-fit:contain;border:1px solid rgba(212,175,55,0.15)}
 
         /* REVIEWS */
         .reviews{background:var(--black-light);overflow:hidden}
@@ -286,7 +292,7 @@
         .review-stars{color:var(--gold);font-size:.7rem;letter-spacing:2px;margin-bottom:15px}
         .review-text{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;color:rgba(255,255,255,0.75);line-height:1.7;margin-bottom:22px}
         .review-author{display:flex;align-items:center;gap:12px;padding-top:15px;border-top:1px solid rgba(212,175,55,0.08)}
-        .review-avatar{width:42px;height:42px;background:var(--gradient-gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:.9rem;font-weight:700;color:var(--black)}
+        .review-avatar{width:42px;height:42px;background:var(--gradient-gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:.9rem;font-weight:700;color:var(--black);flex-shrink:0}
         .review-info h4{font-family:'Playfair Display',serif;font-size:.9rem}
         .review-info span{font-size:.65rem;color:var(--gold)}
 
@@ -300,7 +306,8 @@
         .booking-cart-tag{padding:5px 12px;background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.15);font-size:.68rem;color:var(--gold);display:flex;align-items:center;gap:6px}
         .booking-cart-tag button{background:none;border:none;color:rgba(255,255,255,0.4);cursor:pointer;font-size:.55rem;transition:color .2s}
         .booking-cart-tag button:hover{color:#ff4444}
-        .bk-total{font-size:.82rem;color:rgba(255,255,255,0.5)}.bk-total b{color:var(--gold)}
+        .bk-total{font-size:.82rem;color:rgba(255,255,255,0.5)}
+        .bk-total b{color:var(--gold)}
         .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
         .form-group{display:flex;flex-direction:column;gap:5px}
         .form-group.full{grid-column:span 2}
@@ -350,8 +357,9 @@
         /* FOOTER */
         .footer{background:var(--black);padding:70px 50px 25px;border-top:1px solid rgba(212,175,55,0.08)}
         .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:50px;max-width:1100px;margin:0 auto 50px}
+        .footer-logo-img{width:50px;height:50px;object-fit:contain;margin-bottom:10px}
         .footer-brand-name{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;margin-bottom:4px}
-        .footer-brand-hindi{font-size:.7rem;color:var(--gold);margin-bottom:12px}
+        .footer-brand-sub{font-size:.6rem;color:var(--gold);margin-bottom:12px;letter-spacing:2px;text-transform:uppercase;font-family:'Montserrat',sans-serif}
         .footer-brand p{font-size:.78rem;color:rgba(255,255,255,0.45);line-height:1.8;margin-bottom:15px}
         .footer h4{font-family:'Playfair Display',serif;font-size:.9rem;font-weight:600;margin-bottom:20px;position:relative;padding-bottom:8px}
         .footer h4::after{content:'';position:absolute;bottom:0;left:0;width:25px;height:2px;background:var(--gold)}
@@ -361,7 +369,7 @@
         .footer-bottom{border-top:1px solid rgba(255,255,255,0.04);padding-top:25px;display:flex;align-items:center;justify-content:space-between;max-width:1100px;margin:0 auto;flex-wrap:wrap;gap:10px}
         .footer-copy{font-size:.68rem;color:rgba(255,255,255,0.35)}
 
-        /* FLOATING */
+        /* FLOAT */
         .float-btns{position:fixed;bottom:25px;right:25px;z-index:9998;display:flex;flex-direction:column;gap:10px}
         .float-btn{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;cursor:pointer;transition:all .3s;text-decoration:none;border:none}
         .wa-btn{background:#25D366;color:#fff;box-shadow:0 4px 20px rgba(37,211,102,0.3);animation:waPulse 2s infinite}
@@ -371,9 +379,7 @@
         .top-btn.vis,.bottom-btn.vis{opacity:1;visibility:visible;transform:translateY(0)}
         .top-btn:hover,.bottom-btn:hover{background:var(--gold);color:var(--black)}
 
-        /* ============================================= */
-        /* RESPONSIVE: TABLET (max-width:1024px)         */
-        /* ============================================= */
+        /* TABLET */
         @media(max-width:1024px){
             .section{padding:75px 30px}
             .navbar{padding:12px 20px}
@@ -381,12 +387,10 @@
             .nav-menu{display:none}
             .hamburger{display:flex}
             .nav-book-btn{display:none}
-            .nav-logo{width:36px;height:36px;font-size:.85rem}
+            .nav-logo-img{width:36px;height:36px}
             .nav-brand-name{font-size:1rem}
-            .nav-brand-hindi{font-size:.5rem;letter-spacing:1.5px}
-            .nav-brand{gap:8px}
             .about-grid{grid-template-columns:1fr;gap:40px}
-            .about-img{height:350px}
+            .about-img-box{height:350px}
             .gallery-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:220px}
             .gallery-item:nth-child(1){grid-row:span 1}
             .gallery-item:nth-child(4){grid-column:span 1}
@@ -394,178 +398,101 @@
             .contact-grid{grid-template-columns:1fr}
             .footer-grid{grid-template-columns:1fr 1fr}
             .section-title{font-size:clamp(1.8rem,5vw,2.8rem)}
-            .about-content h3{font-size:1.8rem}
-            .svc-grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
         }
 
-        /* ============================================= */
-        /* RESPONSIVE: MOBILE (max-width:768px)          */
-        /* ============================================= */
+        /* MOBILE */
         @media(max-width:768px){
             .section{padding:55px 16px}
             .section-header{margin-bottom:40px}
-            .section-title{font-size:clamp(1.6rem,6.5vw,2.4rem)!important;line-height:1.25;letter-spacing:-0.5px}
-            .section-label{font-size:.55rem;letter-spacing:3.5px;margin-bottom:10px}
-            .section-desc{font-size:.82rem;line-height:1.7}
-            .gold-line{margin:14px auto 0}
-
-            /* Navbar Mobile */
-            .navbar{padding:10px 14px;min-height:0}
+            .section-title{font-size:clamp(1.6rem,6.5vw,2.4rem)!important;line-height:1.25}
+            .section-label{font-size:.55rem;letter-spacing:3.5px}
+            .section-desc{font-size:.82rem}
+            .navbar{padding:10px 14px}
             .navbar.scrolled{padding:8px 14px}
-            .nav-logo{width:32px;height:32px;font-size:.78rem}
-            .nav-brand{gap:7px}
-            .nav-brand-name{font-size:.88rem;line-height:1.15}
-            .nav-brand-hindi{font-size:.45rem;letter-spacing:1px}
+            .nav-logo-img{width:32px;height:32px}
+            .nav-brand-name{font-size:.88rem}
+            .nav-brand-sub{font-size:.42rem}
             .nav-cart-btn{width:34px;height:34px;font-size:.8rem}
-            .cart-badge{width:16px;height:16px;font-size:.45rem;top:-5px;right:-5px}
             .nav-right{gap:10px}
-
-            /* Mobile Menu stagger */
             .mobile-menu{gap:18px}
             .mobile-menu a{font-size:1.3rem}
-            .mobile-menu.active a:nth-child(1){transition-delay:.05s}
-            .mobile-menu.active a:nth-child(2){transition-delay:.1s}
-            .mobile-menu.active a:nth-child(3){transition-delay:.15s}
-            .mobile-menu.active a:nth-child(4){transition-delay:.2s}
-            .mobile-menu.active a:nth-child(5){transition-delay:.25s}
-            .mobile-menu.active a:nth-child(6){transition-delay:.3s}
-            .mobile-menu.active a:nth-child(7){transition-delay:.35s}
-            .mobile-menu a{transition:all .35s ease}
-
-            /* Hero */
             .hero{min-height:100svh}
             .hero-content{padding:0 16px}
-            .hero-badge{font-size:.5rem;padding:6px 14px;letter-spacing:2px;margin-bottom:20px}
+            .hero-logo-img{width:65px;height:65px}
+            .hero-badge{font-size:.5rem;padding:6px 14px;margin-bottom:20px}
             .hero-title{font-size:clamp(1.8rem,8vw,2.6rem)!important;margin-bottom:14px}
-            .hero-sub{font-size:.92rem;margin-bottom:25px;line-height:1.6}
+            .hero-sub{font-size:.92rem;margin-bottom:25px}
             .hero-btns{flex-direction:column;gap:12px}
             .btn-gold,.btn-outline{width:100%;text-align:center;padding:14px 30px;font-size:.65rem}
-            .scroll-indicator{bottom:20px}
-
-            /* About */
-            .about-content h3{font-size:1.55rem!important;line-height:1.3}
+            .about-content h3{font-size:1.55rem!important}
             .about-content p{font-size:.82rem;margin-bottom:20px}
             .about-features{grid-template-columns:1fr}
-            .about-feat{padding:12px}
-            .about-feat span{font-size:.72rem}
-            .about-img{height:280px}
+            .about-img-box{height:280px}
             .about-badge{width:90px;height:90px;bottom:-10px;right:-10px}
             .about-badge-num{font-size:1.5rem}
-            .about-badge-txt{font-size:.4rem}
-
-            /* Services — Horizontal Swipe on Mobile */
-            .svc-cats{gap:6px;margin-bottom:25px;justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap;padding-bottom:8px;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none}
+            .svc-cats{gap:6px;margin-bottom:25px;justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap;padding-bottom:8px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
             .svc-cats::-webkit-scrollbar{display:none}
             .svc-cat-btn{padding:7px 16px;font-size:.58rem;white-space:nowrap;flex-shrink:0}
-
-            .svc-grid{display:flex!important;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:14px;padding-bottom:15px;scrollbar-width:none;-ms-overflow-style:none}
+            .svc-grid{display:flex!important;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:14px;padding-bottom:15px;scrollbar-width:none}
             .svc-grid::-webkit-scrollbar{display:none}
             .svc-grid .svc-card{min-width:260px;max-width:280px;flex-shrink:0;scroll-snap-align:center;padding:28px 20px;transform:none!important}
             .svc-grid .svc-card:hover{transform:none!important;box-shadow:none}
             .show-more-wrap{display:none!important}
-
-            /* Gallery — Mobile Carousel */
             .gallery-grid{display:none!important}
             .gallery-mobile-carousel{display:block!important;overflow:hidden}
-            .gallery-carousel-track{display:flex;gap:14px;animation:galleryScroll 35s linear infinite;width:max-content}
-            .gallery-carousel-track:active{animation-play-state:paused}
+            .gallery-carousel-track{display:flex;gap:14px;width:max-content;animation:galleryScroll 35s linear infinite}
             @keyframes galleryScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
             .gallery-carousel-item{flex-shrink:0;width:240px;height:180px;position:relative;overflow:hidden;border:1px solid rgba(212,175,55,0.06);cursor:pointer}
-            .gallery-carousel-item .gallery-bg{width:100%;height:100%;background:linear-gradient(135deg,var(--black-medium),#151520);display:flex;align-items:center;justify-content:center}
-            .gallery-carousel-item .gallery-bg i{font-size:2rem;color:var(--gold);opacity:.12}
-            .gallery-carousel-item .gallery-ov{position:absolute;bottom:0;left:0;right:0;padding:14px;background:linear-gradient(to top,rgba(10,10,10,0.9),transparent);opacity:1}
-            .gallery-carousel-item .gallery-ov h4{font-family:'Playfair Display',serif;font-size:.85rem;margin-bottom:2px}
-            .gallery-carousel-item .gallery-ov span{font-size:.62rem;color:var(--gold)}
-
-            /* Reviews */
+            .gallery-carousel-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+            .gallery-carousel-item:hover img{transform:scale(1.05)}
+            .gallery-carousel-item .g-ov{position:absolute;bottom:0;left:0;right:0;padding:14px;background:linear-gradient(to top,rgba(10,10,10,0.9),transparent)}
+            .gallery-carousel-item .g-ov h4{font-family:'Playfair Display',serif;font-size:.85rem;margin-bottom:2px}
+            .gallery-carousel-item .g-ov span{font-size:.62rem;color:var(--gold)}
             .review-card{width:280px;padding:25px}
             .review-text{font-size:.95rem}
             .rating-big{font-size:3rem}
             .review-rating{margin-bottom:30px}
-
-            /* Why Cards */
             .why-card{width:220px;padding:25px 18px}
-
-            /* Counters */
             .counter-item{min-width:140px;gap:10px}
             .counter-num{font-size:1.8rem}
-            .counter-label{font-size:.5rem}
             .counter-marquee{padding:25px 0}
-
-            /* Booking */
             .booking-box{padding:25px 16px}
             .form-grid{grid-template-columns:1fr}
-            .form-group.full{grid-column:span 1}
-            .form-submit{grid-column:span 1}
+            .form-group.full,.form-submit{grid-column:span 1}
             .time-slots{gap:5px}
             .time-slot{padding:6px 11px;font-size:.65rem}
-            .booking-cart-summary{padding:14px}
-            .booking-cart-tag{font-size:.62rem;padding:4px 10px}
-
-            /* Service Modal */
+            .booking-cart-tag{font-size:.62rem}
             .svc-modal{max-height:95vh;width:95%}
             .svc-modal-top{padding:25px 20px 0}
             .svc-modal-form{padding:0 20px 25px}
             .svc-modal-form .mf-grid{grid-template-columns:1fr}
             .mf-group.full{grid-column:span 1}
             .modal-btns{flex-direction:column}
-            .modal-btns button{padding:14px 20px}
-            .svc-modal-icon{width:60px;height:60px;font-size:1.4rem}
-            .svc-modal h3{font-size:1.2rem}
-            .m-time-slots{gap:5px}
-            .m-time-slot{padding:5px 10px;font-size:.65rem}
-
-            /* Cart Sidebar */
             .cart-sidebar{width:100%;max-width:100vw}
-            .cart-header{padding:18px}
-            .cart-items{padding:12px 18px}
-            .cart-footer{padding:15px 18px}
-
-            /* Success */
             .success-box{padding:35px 22px}
-            .success-box h3{font-size:1.2rem}
-            .success-box .s-summary{font-size:.72rem;padding:12px}
-
-            /* Contact */
             .contact-card{padding:18px;gap:14px}
-            .cc-icon{width:38px;height:38px}
             .contact-map{min-height:280px}
-            .soc-link{width:36px;height:36px}
-
-            /* Footer */
             .footer{padding:50px 16px 20px}
             .footer-grid{grid-template-columns:1fr;gap:30px}
             .footer-bottom{flex-direction:column;text-align:center}
-            .footer-brand-name{font-size:1.25rem}
-
-            /* Toast */
             .toast-container{top:65px;right:10px;left:10px}
             .toast{min-width:auto;max-width:100%;font-size:.75rem;padding:12px 16px}
-
-            /* Float Buttons */
             .float-btns{bottom:18px;right:18px}
             .float-btn{width:46px;height:46px;font-size:1rem}
-
-            /* Lightbox */
-            .lb-img{width:90vw;height:60vw;max-height:300px}
-            .lb-close{top:15px;right:15px;width:38px;height:38px}
+            .lb-nav{width:36px;height:36px;font-size:.8rem}
+            .lb-prev{left:10px}
+            .lb-next{right:10px}
         }
-
-        /* ============================================= */
-        /* RESPONSIVE: SMALL MOBILE (max-width:420px)    */
-        /* ============================================= */
         @media(max-width:420px){
             .hero-title{font-size:1.6rem!important}
-            .hero-sub{font-size:.82rem}
-            .hero-badge{font-size:.45rem;padding:5px 12px}
+            .hero-logo-img{width:55px;height:55px}
             .section-title{font-size:1.45rem!important}
             .about-content h3{font-size:1.35rem!important}
             .svc-grid .svc-card{min-width:230px}
-            .gallery-carousel-item{width:200px;height:150px}
+            .gallery-carousel-item{width:200px;height:155px}
             .review-card{width:250px;padding:20px}
-            .review-text{font-size:.88rem}
             .nav-brand-name{font-size:.8rem}
-            .nav-logo{width:28px;height:28px;font-size:.7rem}
+            .nav-logo-img{width:28px;height:28px}
         }
     </style>
 </head>
@@ -575,7 +502,7 @@
 
 <div class="loading-screen" id="loader">
     <div class="loader-content">
-        <div class="loader-logo">VR Salon</div>
+        <img src="img/logo1.jpg" alt="VR Salon Logo" class="loader-logo-img">
         <div class="loader-bar"><div class="loader-fill"></div></div>
         <div class="loader-sub">Crafting Elegance</div>
     </div>
@@ -585,10 +512,10 @@
 
 <nav class="navbar" id="navbar">
     <a href="#" class="nav-brand">
-        <div class="nav-logo">VR</div>
+        <img src="img/logo1.jpg" alt="VR Salon Logo" class="nav-logo-img">
         <div class="nav-brand-text">
-            <span class="nav-brand-name">VR Unisex Salon</span>
-            <span class="nav-brand-hindi">वर यूनिसेक्स सैलून</span>
+            <span class="nav-brand-name">VR Salon</span>
+            <span class="nav-brand-sub">Premium Beauty & Grooming</span>
         </div>
     </a>
     <ul class="nav-menu">
@@ -606,9 +533,7 @@
             <span class="cart-badge" id="cartBadge">0</span>
         </button>
         <a href="#booking" class="nav-book-btn">Book Now</a>
-        <div class="hamburger" id="hamburger">
-            <span></span><span></span><span></span>
-        </div>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
     </div>
 </nav>
 
@@ -630,7 +555,7 @@
     </div>
     <div class="cart-items" id="cartItems"></div>
     <div class="cart-footer">
-        <div class="cart-total"><span>Total</span><span id="cartTotal">₹0</span></div>
+        <div class="cart-total"><span>Total</span><span id="cartTotal">&#8377;0</span></div>
         <button class="btn-gold cart-checkout" onclick="cartCheckout()">Confirm Appointment</button>
     </div>
 </div>
@@ -641,7 +566,7 @@
         <div class="svc-modal-top">
             <div class="svc-modal-icon" id="smIcon"><i class="fas fa-cut"></i></div>
             <h3 id="smName">Service</h3>
-            <div class="m-price" id="smPrice">₹500</div>
+            <div class="m-price" id="smPrice">&#8377;500</div>
             <div class="m-dur" id="smDur">30 min</div>
             <div class="m-cat" id="smCat">Category</div>
             <p class="m-desc" id="smDesc">Description</p>
@@ -664,8 +589,12 @@
 
 <div class="lightbox" id="lightbox">
     <button class="lb-close" onclick="closeLb()"><i class="fas fa-times"></i></button>
+    <button class="lb-nav lb-prev" onclick="lbNav(-1)"><i class="fas fa-chevron-left"></i></button>
+    <button class="lb-nav lb-next" onclick="lbNav(1)"><i class="fas fa-chevron-right"></i></button>
     <div class="lb-content">
-        <div class="lb-img"><i class="fas fa-image"></i><span id="lbTitle"></span></div>
+        <div class="lb-img-container">
+            <img id="lbImage" src="" alt="Gallery Image">
+        </div>
     </div>
 </div>
 
@@ -683,14 +612,14 @@
 <!-- HERO -->
 <section class="hero" id="home">
     <div class="hero-fallback"></div>
-    <video class="hero-video" id="Video/heroVideo" autoplay muted loop playsinline>
-        <source src="video/hero(2).mp4" type="video/mp4">
+    <video class="hero-video" id="heroVideo" autoplay muted loop playsinline>
+        <source src="video/hero (2).mp4" type="video/mp4">
     </video>
     <div class="hero-overlay"></div>
     <div class="hero-particles" id="particles"></div>
     <div class="hero-glow"></div>
     <div class="hero-content">
-        <div class="hero-badge"><span class="badge-dot"></span>Open Daily: 10 AM – 11 PM</div>
+                <div class="hero-badge"><span class="badge-dot"></span>Open Daily: 10 AM &ndash; 11 PM</div>
         <h1 class="hero-title">Luxury Grooming<br>Crafted For <span class="gold-text">Modern Elegance</span></h1>
         <p class="hero-sub">Experience world-class beauty, precision styling, and premium self-care designed to elevate your confidence and redefine your personal style.</p>
         <div class="hero-btns">
@@ -711,18 +640,23 @@
     </div>
     <div class="about-grid">
         <div class="about-visual reveal-l">
-            <div class="about-img"><i class="fas fa-cut about-img-icon"></i></div>
-            <div class="about-badge"><span class="about-badge-num">5.0</span><span class="about-badge-txt">★ Rating</span></div>
+            <div class="about-img-box">
+                <img src="img/logo1.jpg" alt="VR Salon" class="about-logo-img">
+            </div>
+            <div class="about-badge">
+                <span class="about-badge-num">5.0</span>
+                <span class="about-badge-txt">&#9733; Rating</span>
+            </div>
         </div>
         <div class="about-content reveal-r">
             <h3>Redefining <span class="gold-text">Beauty Standards</span></h3>
-            <p>At VR Unisex Salon, beauty is more than a service — it is an experience crafted with passion, creativity, and care. Located in the heart of Kalyan East, Maharashtra, our salon blends luxury interiors, expert professionals, advanced techniques, and premium-quality products to deliver personalized beauty and grooming solutions for every client.</p>
+            <p>At VR Salon, beauty is more than a service — it is an experience crafted with passion, creativity, and care. Located in the heart of Kalyan East, Maharashtra, our salon blends luxury interiors, expert professionals, advanced techniques, and premium-quality products to deliver personalized beauty and grooming solutions for every client.</p>
             <p>From modern hair artistry to rejuvenating skincare and grooming experiences, we focus on creating confidence, comfort, and elegance in every visit.</p>
             <div class="about-features">
                 <div class="about-feat"><i class="fas fa-award"></i><span>Certified Stylists</span></div>
                 <div class="about-feat"><i class="fas fa-pump-soap"></i><span>Premium Products</span></div>
                 <div class="about-feat"><i class="fas fa-shield-alt"></i><span>Hygienic Environment</span></div>
-                <div class="about-feat"><i class="fas fa-clock"></i><span>Open Daily: 10 AM – 11 PM</span></div>
+                <div class="about-feat"><i class="fas fa-clock"></i><span>Open Daily: 10 AM &ndash; 11 PM</span></div>
             </div>
         </div>
     </div>
@@ -754,14 +688,16 @@
 </section>
 
 <!-- COUNTERS -->
-<div class="counters-section"><div class="counter-marquee"><div class="counter-track" id="counterTrack"></div></div></div>
+<div class="counters-section">
+    <div class="counter-marquee"><div class="counter-track" id="counterTrack"></div></div>
+</div>
 
 <!-- GALLERY -->
 <section class="section gallery" id="gallery">
     <div class="section-header reveal">
         <div class="section-label">Our Portfolio</div>
         <h2 class="section-title">Real <span class="gold-text">Transformations</span></h2>
-        <p class="section-desc">Explore real transformations & signature styling moments created by our expert artists.</p>
+        <p class="section-desc">Explore real transformations and signature styling moments created by our expert artists.</p>
         <div class="gold-line"></div>
     </div>
     <div class="gallery-grid" id="galleryGrid"></div>
@@ -776,7 +712,11 @@
         <p class="section-desc">Real experiences, trusted transformations, and luxury salon moments shared by our happy clients.</p>
         <div class="gold-line"></div>
     </div>
-    <div class="review-rating reveal"><div class="rating-big">5.0</div><div class="rating-stars">★ ★ ★ ★ ★</div><div class="rating-txt">Based on Google Reviews</div></div>
+    <div class="review-rating reveal">
+        <div class="rating-big">5.0</div>
+        <div class="rating-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <div class="rating-txt">Based on Google Reviews</div>
+    </div>
     <div class="review-marquee"><div class="review-track" id="reviewTrack"></div></div>
 </section>
 
@@ -800,7 +740,7 @@
                 <div class="form-group"><label class="form-label">Phone *</label><input type="tel" class="form-input" id="bkPhone" placeholder="+91 XXXXX XXXXX" required></div>
                 <div class="form-group"><label class="form-label">Date *</label><input type="date" class="form-input" id="bkDate" required></div>
                 <div class="form-group"><label class="form-label">Time Slot *</label><div class="time-slots" id="bkTimeSlots"></div><input type="hidden" id="bkTime"></div>
-                <div class="form-group" id="manualServiceGroup"><label class="form-label">Select Service</label><select class="form-select" id="bkService"><option value="">Choose a service</option></select><span class="svc-select-note" id="svcNote">Or add services from service cards above</span></div>
+                <div class="form-group"><label class="form-label">Select Service</label><select class="form-select" id="bkService"><option value="">Choose a service</option></select><span class="svc-select-note" id="svcNote">Or add services from service cards above</span></div>
                 <div class="form-group"><label class="form-label">Email (optional)</label><input type="email" class="form-input" id="bkEmail" placeholder="your@email.com"></div>
                 <div class="form-group full"><label class="form-label">Notes (optional)</label><textarea class="form-textarea" id="bkNotes" placeholder="Any special requests..."></textarea></div>
                 <div class="form-submit"><button type="submit" class="btn-gold"><i class="fas fa-calendar-check"></i>&nbsp;&nbsp;Confirm Booking</button></div>
@@ -814,38 +754,71 @@
     <div class="section-header reveal">
         <div class="section-label">Get in Touch</div>
         <h2 class="section-title">Visit <span class="gold-text">VR Salon</span></h2>
-        <p class="section-desc">We'd love to welcome you. Reach out anytime!</p>
+        <p class="section-desc">We would love to welcome you. Reach out anytime!</p>
         <div class="gold-line"></div>
     </div>
     <div class="contact-grid">
         <div class="contact-cards">
             <div class="contact-card reveal-l"><div class="cc-icon"><i class="fas fa-phone-alt"></i></div><div><h4>Call Us</h4><a href="tel:+919867261962">+91 98672 61962</a></div></div>
             <div class="contact-card reveal-l"><div class="cc-icon"><i class="fas fa-map-marker-alt"></i></div><div><h4>Visit Us</h4><p>649G+VGR, Kalyan East, Pisavli Village,<br>Dombivli East, Kalyan, Maharashtra 421306</p></div></div>
-            <div class="contact-card reveal-l"><div class="cc-icon"><i class="fas fa-clock"></i></div><div><h4>Hours</h4><p style="color:#00ff88;font-weight:600;">● Open Daily: 10 AM – 11 PM</p></div></div>
+            <div class="contact-card reveal-l"><div class="cc-icon"><i class="fas fa-clock"></i></div><div><h4>Hours</h4><p style="color:#00ff88;font-weight:600;">&#9679; Open Daily: 10 AM &ndash; 11 PM</p></div></div>
             <div class="contact-card reveal-l"><div class="cc-icon"><i class="fas fa-share-alt"></i></div><div><h4>Follow Us</h4><div class="social-links"><a href="#" class="soc-link"><i class="fab fa-instagram"></i></a><a href="#" class="soc-link"><i class="fab fa-facebook-f"></i></a><a href="https://wa.me/919867261962" class="soc-link" target="_blank"><i class="fab fa-whatsapp"></i></a><a href="#" class="soc-link"><i class="fab fa-youtube"></i></a></div></div></div>
         </div>
-        <div class="contact-map reveal-r"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3768.5!2d73.1!3d19.2!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDEyJzAwLjAiTiA3M8KwMDYnMDAuMCJF!5e0!3m2!1sen!2sin!4v1" allowfullscreen loading="lazy"></iframe></div>
+        <div class="contact-map reveal-r">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3768.5!2d73.1!3d19.2!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDEyJzAwLjAiTiA3M8KwMDYnMDAuMCJF!5e0!3m2!1sen!2sin!4v1" allowfullscreen loading="lazy"></iframe>
+        </div>
     </div>
 </section>
 
+<!-- FOOTER -->
 <footer class="footer">
     <div class="footer-grid">
-        <div class="footer-brand"><div class="footer-brand-name">VR Unisex Salon</div><div class="footer-brand-hindi">वर यूनिसेक्स सैलून</div><p>Premium unisex salon offering world-class beauty and grooming services in Kalyan East, Maharashtra.</p><div class="social-links"><a href="#" class="soc-link"><i class="fab fa-instagram"></i></a><a href="#" class="soc-link"><i class="fab fa-facebook-f"></i></a><a href="https://wa.me/919867261962" class="soc-link" target="_blank"><i class="fab fa-whatsapp"></i></a></div></div>
-        <div><h4>Quick Links</h4><ul class="footer-links"><li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#booking">Book Now</a></li></ul></div>
-        <div><h4>Services</h4><ul class="footer-links"><li><a href="#services">Hair Styling</a></li><li><a href="#services">Keratin Treatment</a></li><li><a href="#services">Bridal Makeup</a></li><li><a href="#services">Facial & Cleanup</a></li><li><a href="#services">Hair Spa</a></li></ul></div>
-        <div><h4>Contact</h4><ul class="footer-links"><li><a href="tel:+919867261962"><i class="fas fa-phone" style="font-size:.5rem"></i> +91 98672 61962</a></li><li><a href="#"><i class="fas fa-map-marker-alt" style="font-size:.5rem"></i> Kalyan East</a></li><li><a href="#" style="color:#00ff88"><i class="fas fa-clock" style="font-size:.5rem"></i> 10 AM – 11 PM</a></li></ul></div>
+        <div class="footer-brand">
+            <img src="img/logo1.jpg" alt="VR Salon Logo" class="footer-logo-img">
+            <div class="footer-brand-name">VR Salon</div>
+            <div class="footer-brand-sub">Premium Beauty & Grooming</div>
+            <p>Premium salon offering world-class beauty and grooming services in Kalyan East, Maharashtra.</p>
+            <div class="social-links"><a href="#" class="soc-link"><i class="fab fa-instagram"></i></a><a href="#" class="soc-link"><i class="fab fa-facebook-f"></i></a><a href="https://wa.me/919867261962" class="soc-link" target="_blank"><i class="fab fa-whatsapp"></i></a></div>
+        </div>
+        <div>
+            <h4>Quick Links</h4>
+            <ul class="footer-links">
+                <li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#booking">Book Now</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4>Services</h4>
+            <ul class="footer-links">
+                <li><a href="#services">Hair Styling</a></li><li><a href="#services">Keratin Treatment</a></li><li><a href="#services">Bridal Makeup</a></li><li><a href="#services">Facial &amp; Cleanup</a></li><li><a href="#services">Hair Spa</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4>Contact</h4>
+            <ul class="footer-links">
+                <li><a href="tel:+919867261962"><i class="fas fa-phone" style="font-size:.5rem"></i>&nbsp;+91 98672 61962</a></li>
+                <li><a href="#"><i class="fas fa-map-marker-alt" style="font-size:.5rem"></i>&nbsp;Kalyan East, Maharashtra</a></li>
+                <li><a href="#" style="color:#00ff88"><i class="fas fa-clock" style="font-size:.5rem"></i>&nbsp;10 AM &ndash; 11 PM Daily</a></li>
+            </ul>
+        </div>
     </div>
-    <div class="footer-bottom"><div class="footer-copy">© 2024 VR Unisex Salon | वर यूनिसेक्स सैलून. All Rights Reserved.</div></div>
+    <div class="footer-bottom">
+        <div class="footer-copy">&copy; 2024 VR Salon. All Rights Reserved.</div>
+    </div>
 </footer>
 
 <div class="float-btns">
     <button class="float-btn top-btn" id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-chevron-up"></i></button>
     <button class="float-btn bottom-btn vis" id="bottomBtn" onclick="window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'})"><i class="fas fa-chevron-down"></i></button>
-    <a href="https://wa.me/919867261962?text=Hi! I'd like to book at VR Salon." class="float-btn wa-btn" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://wa.me/919867261962?text=Hi! I'd like to book an appointment at VR Salon." class="float-btn wa-btn" target="_blank"><i class="fab fa-whatsapp"></i></a>
 </div>
 
 <script>
-const SERVICES=[
+/* =====================================================
+   VR SALON — PREMIUM BOOKING SYSTEM
+   Backend-ready: Replace localStorage with API calls
+   ===================================================== */
+
+const SERVICES = [
     {cat:'Hair',icon:'fa-cut',name:'Hair Cut',desc:'Precision haircuts tailored to your face shape and personal style by expert stylists.',price:200,dur:'30 min'},
     {cat:'Hair',icon:'fa-magic',name:'Hair Styling',desc:'Creative styling for any occasion — from casual everyday looks to red-carpet glamour.',price:500,dur:'45 min'},
     {cat:'Hair',icon:'fa-tint',name:'Hair Wash',desc:'Refreshing hair wash with premium shampoos and a relaxing scalp massage.',price:150,dur:'20 min'},
@@ -871,194 +844,464 @@ const SERVICES=[
     {cat:'Spa',icon:'fa-heartbeat',name:'Scalp Treatment',desc:'Advanced scalp treatments to address hair loss, dandruff, and overall scalp health.',price:700,dur:'45 min'},
 ];
 
-const WHY_DATA=[
+const WHY_DATA = [
     {icon:'fa-snowflake',title:'AC Premium Interior',desc:'Air conditioned luxury salon space'},
     {icon:'fa-music',title:'Relaxing Music',desc:'Curated ambient music experience'},
     {icon:'fa-couch',title:'Comfortable Lounge',desc:'Spacious waiting area with sofas'},
-    {icon:'fa-chair',title:'Premium Seating',desc:'Comfortable salon chairs & stations'},
+    {icon:'fa-chair',title:'Premium Seating',desc:'Comfortable salon chairs and stations'},
     {icon:'fa-user-graduate',title:'Expert Stylists',desc:'Highly trained professionals'},
     {icon:'fa-flask',title:'Imported Products',desc:'Premium international-grade products'},
     {icon:'fa-shield-virus',title:'Hygienic Tools',desc:'Sterilized equipment always'},
     {icon:'fa-comments',title:'Personal Consultation',desc:'Tailored recommendations for you'},
 ];
-const COUNTERS=[{num:'5,000+',label:'Happy Clients'},{num:'23+',label:'Premium Services'},{num:'10+',label:'Expert Stylists'},{num:'8+',label:'Years Experience'}];
-const GALLERY=[
-    {icon:'fa-cut',title:'Hair Styling Mastery',cat:'Hair Cut & Style'},
-    {icon:'fa-crown',title:'Bridal Transformation',cat:'Bridal Makeup'},
-    {icon:'fa-palette',title:'Color Artistry',cat:'Hair Coloring'},
-    {icon:'fa-user-tie',title:'Beard Perfection',cat:'Beard Styling'},
-    {icon:'fa-gem',title:'Keratin Smoothing',cat:'Hair Treatment'},
-    {icon:'fa-star',title:'Party Glam',cat:'Party Makeup'},
-    {icon:'fa-spa',title:'Spa Relaxation',cat:'Hair Spa'},
-    {icon:'fa-hand-sparkles',title:'Nail Art',cat:'Manicure & Pedicure'},
+
+const COUNTERS = [
+    {num:'5,000+',label:'Happy Clients'},
+    {num:'23+',label:'Premium Services'},
+    {num:'10+',label:'Expert Stylists'},
+    {num:'8+',label:'Years Experience'},
 ];
-const REVIEWS=[
-    {name:'Raj Yadav',init:'RY',text:'Staff bahot frank hai and services bhi bahot acchi hai. Highly recommended for quality grooming at affordable prices.'},
+
+/* ===== GALLERY: Updated with real transformation images ===== */
+const GALLERY_DATA = [
+    {src:'img/img1.jpeg',title:'Hair Styling Mastery',cat:'Hair Cut & Style'},
+    {src:'img/img2.jpeg',title:'Bridal Transformation',cat:'Bridal Makeup'},
+    {src:'img/img3.jpeg',title:'Color Artistry',cat:'Hair Coloring'},
+    {src:'img/img4.jpeg',title:'Beard Perfection',cat:'Beard Styling'},
+    {src:'img/img5.jpeg',title:'Keratin Smoothing',cat:'Hair Treatment'},
+    {src:'img/img6.jpeg',title:'Party Glam',cat:'Party Makeup'},
+    {src:'img/img7.jpeg',title:'Spa Relaxation',cat:'Hair Spa'},
+    {src:'img/img8.jpeg',title:'Nail Art',cat:'Manicure & Pedicure'},
+];
+
+const REVIEWS = [
+    {name:'Raj Yadav',init:'RY',text:'Staff are very friendly and services are excellent. Highly recommended for quality grooming at affordable prices.'},
     {name:'Pramod Jadhav',init:'PJ',text:'Excellent hairstyling and hair treatment services. Very professional team using premium quality products. Best salon in Kalyan!'},
     {name:'Pappu Sharma',init:'PS',text:'Professional hairstyling experience. Very clean and hygienic environment. The stylists really know their craft.'},
     {name:'Sneha Patil',init:'SP',text:'Amazing bridal makeup! They made my wedding day absolutely unforgettable. Highly skilled artists with attention to detail.'},
     {name:'Amit Gupta',init:'AG',text:'Got keratin treatment done here. Results are incredible! My hair has never been this smooth and manageable.'},
     {name:'Priya Deshmukh',init:'PD',text:'Best facial and cleanup service! My skin was glowing after the session. The products they use are top notch.'},
 ];
-const TIME_SLOTS=['10:00 AM','11:00 AM','12:00 PM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM','6:00 PM','7:00 PM','8:00 PM','9:00 PM','10:00 PM'];
 
-let cart=JSON.parse(localStorage.getItem('vrCart'))||[];
-let showAll=false;
-let currentModalIdx=null;
-const INIT_SHOW=8;
+const TIME_SLOTS = ['10:00 AM','11:00 AM','12:00 PM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM','6:00 PM','7:00 PM','8:00 PM','9:00 PM','10:00 PM'];
 
-function showToast(msg,type='info',dur=4000){const c=document.getElementById('toastContainer');const t=document.createElement('div');t.className=`toast ${type}`;const icons={success:'fa-check-circle',warning:'fa-exclamation-triangle',error:'fa-times-circle',info:'fa-info-circle'};t.innerHTML=`<i class="fas ${icons[type]||icons.info}"></i><span>${msg}</span><button class="toast-close" onclick="this.parentElement.remove()"><i class="fas fa-times"></i></button>`;c.appendChild(t);requestAnimationFrame(()=>requestAnimationFrame(()=>t.classList.add('show')));setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),400)},dur)}
+let cart = JSON.parse(localStorage.getItem('vrCart')) || [];
+let showAll = false;
+let currentModalIdx = null;
+let lbIndex = 0;
+const INIT_SHOW = 8;
 
-window.addEventListener('load',()=>{
-    setTimeout(()=>document.getElementById('loader').classList.add('hidden'),2200);
-    initParticles();initServices();initWhyMarquee();initCounterMarquee();initGallery();initReviewMarquee();
-    initTimeSlots('bkTimeSlots','bkTime');populateBookingSelect();updateCartUI();
-    const today=new Date().toISOString().split('T')[0];
-    const d=document.getElementById('bkDate');if(d)d.min=today;
-    const v=document.getElementById('heroVideo');v.addEventListener('canplaythrough',()=>v.classList.add('loaded'));
+/* ===== TOAST ===== */
+function showToast(msg, type='info', dur=4000) {
+    const c = document.getElementById('toastContainer');
+    const t = document.createElement('div');
+    t.className = 'toast ' + type;
+    const icons = {success:'fa-check-circle',warning:'fa-exclamation-triangle',error:'fa-times-circle',info:'fa-info-circle'};
+    t.innerHTML = '<i class="fas ' + (icons[type]||icons.info) + '"></i><span>' + msg + '</span><button class="toast-close" onclick="this.parentElement.remove()"><i class="fas fa-times"></i></button>';
+    c.appendChild(t);
+    requestAnimationFrame(() => requestAnimationFrame(() => t.classList.add('show')));
+    setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 400); }, dur);
+}
+
+/* ===== INIT ===== */
+window.addEventListener('load', () => {
+    setTimeout(() => document.getElementById('loader').classList.add('hidden'), 2200);
+    initParticles();
+    initServices();
+    initWhyMarquee();
+    initCounterMarquee();
+    initGallery();
+    initReviewMarquee();
+    initTimeSlots('bkTimeSlots', 'bkTime');
+    populateBookingSelect();
+    updateCartUI();
+    const d = document.getElementById('bkDate');
+    if (d) d.min = new Date().toISOString().split('T')[0];
+    const v = document.getElementById('heroVideo');
+    v.addEventListener('canplaythrough', () => v.classList.add('loaded'));
 });
 
-function initParticles(){const c=document.getElementById('particles');for(let i=0;i<25;i++){const p=document.createElement('div');p.className='h-particle';p.style.left=Math.random()*100+'%';p.style.animationDelay=Math.random()*10+'s';p.style.animationDuration=(Math.random()*7+6)+'s';const s=Math.random()*2+1;p.style.width=s+'px';p.style.height=s+'px';c.appendChild(p)}}
+/* ===== PARTICLES ===== */
+function initParticles() {
+    const c = document.getElementById('particles');
+    for (let i = 0; i < 25; i++) {
+        const p = document.createElement('div');
+        p.className = 'h-particle';
+        p.style.left = Math.random() * 100 + '%';
+        p.style.animationDelay = Math.random() * 10 + 's';
+        p.style.animationDuration = (Math.random() * 7 + 6) + 's';
+        const s = Math.random() * 2 + 1;
+        p.style.width = s + 'px';
+        p.style.height = s + 'px';
+        c.appendChild(p);
+    }
+}
 
-window.addEventListener('scroll',()=>{
-    const st=window.scrollY;
-    document.getElementById('navbar').classList.toggle('scrolled',st>60);
-    document.getElementById('topBtn').classList.toggle('vis',st>400);
-    const nb=(window.innerHeight+st)>=document.body.scrollHeight-200;
-    document.getElementById('bottomBtn').classList.toggle('vis',!nb&&st<400);
-    const total=document.body.scrollHeight-window.innerHeight;
-    document.getElementById('scrollProgress').style.width=(st/total*100)+'%';
-    document.querySelectorAll('.section,.hero').forEach(sec=>{const top=sec.offsetTop-150;const id=sec.getAttribute('id');if(st>=top&&id)document.querySelectorAll('.nav-link').forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+id))});
-    document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight-80)el.classList.add('vis')});
+/* ===== SCROLL ===== */
+window.addEventListener('scroll', () => {
+    const st = window.scrollY;
+    document.getElementById('navbar').classList.toggle('scrolled', st > 60);
+    document.getElementById('topBtn').classList.toggle('vis', st > 400);
+    const nearBottom = (window.innerHeight + st) >= document.body.scrollHeight - 200;
+    document.getElementById('bottomBtn').classList.toggle('vis', !nearBottom && st < 400);
+    const total = document.body.scrollHeight - window.innerHeight;
+    document.getElementById('scrollProgress').style.width = (st / total * 100) + '%';
+    document.querySelectorAll('.section,.hero').forEach(sec => {
+        const id = sec.getAttribute('id');
+        if (st >= sec.offsetTop - 150 && id) {
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+        }
+    });
+    document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add('vis');
+    });
 });
 
-document.getElementById('hamburger').addEventListener('click',function(){
+/* ===== MOBILE MENU ===== */
+document.getElementById('hamburger').addEventListener('click', function() {
     this.classList.toggle('active');
-    const mm=document.getElementById('mobileMenu');
-    mm.classList.toggle('active');
-    document.body.style.overflow=mm.classList.contains('active')?'hidden':'';
+    const m = document.getElementById('mobileMenu');
+    m.classList.toggle('active');
+    document.body.style.overflow = m.classList.contains('active') ? 'hidden' : '';
 });
-function closeMenu(){document.getElementById('hamburger').classList.remove('active');document.getElementById('mobileMenu').classList.remove('active');document.body.style.overflow=''}
+function closeMenu() {
+    document.getElementById('hamburger').classList.remove('active');
+    document.getElementById('mobileMenu').classList.remove('active');
+    document.body.style.overflow = '';
+}
 
-function initServices(){
-    const cats=[...new Set(SERVICES.map(s=>s.cat))];
-    const catEl=document.getElementById('svcCats');
-    catEl.innerHTML='<button class="svc-cat-btn active" data-cat="All">All</button>'+cats.map(c=>`<button class="svc-cat-btn" data-cat="${c}">${c}</button>`).join('');
-    catEl.querySelectorAll('.svc-cat-btn').forEach(btn=>{btn.addEventListener('click',()=>{catEl.querySelectorAll('.svc-cat-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');showAll=false;renderServices(btn.dataset.cat)})});
+/* ===== SERVICES ===== */
+function initServices() {
+    const cats = [...new Set(SERVICES.map(s => s.cat))];
+    const el = document.getElementById('svcCats');
+    el.innerHTML = '<button class="svc-cat-btn active" data-cat="All">All</button>' + cats.map(c => '<button class="svc-cat-btn" data-cat="' + c + '">' + c + '</button>').join('');
+    el.querySelectorAll('.svc-cat-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            el.querySelectorAll('.svc-cat-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            showAll = false;
+            renderServices(btn.dataset.cat);
+        });
+    });
     renderServices('All');
 }
 
-function renderServices(cat){
-    const grid=document.getElementById('svcGrid');
-    let filtered=cat==='All'?SERVICES:SERVICES.filter(s=>s.cat===cat);
-    const show=showAll?filtered:filtered.slice(0,INIT_SHOW);
-    grid.innerHTML=show.map((s,i)=>{const idx=SERVICES.indexOf(s);return `<div class="svc-card reveal" style="transition-delay:${i*0.04}s" onclick="openSvcModal(${idx})"><div class="svc-icon"><i class="fas ${s.icon}"></i></div><h3 class="svc-name">${s.name}</h3><p class="svc-desc">${s.desc}</p><div class="svc-price">₹${s.price.toLocaleString()} • ${s.dur}</div><div class="svc-actions"><button class="svc-btn" onclick="event.stopPropagation();openSvcModal(${idx})">Book</button><button class="svc-btn cart-add" onclick="event.stopPropagation();addToCart(${idx})"><i class="fas fa-plus"></i> Add</button></div></div>`}).join('');
-    const wrap=document.getElementById('showMoreWrap');
-    wrap.style.display=filtered.length>INIT_SHOW?'block':'none';
-    document.getElementById('showMoreBtn').textContent=showAll?'Show Less':`Show All ${filtered.length} Services`;
-    setTimeout(()=>grid.querySelectorAll('.reveal').forEach(el=>el.classList.add('vis')),50);
+function renderServices(cat) {
+    const grid = document.getElementById('svcGrid');
+    let filtered = cat === 'All' ? SERVICES : SERVICES.filter(s => s.cat === cat);
+    const show = showAll ? filtered : filtered.slice(0, INIT_SHOW);
+    grid.innerHTML = show.map((s, i) => {
+        const idx = SERVICES.indexOf(s);
+        return '<div class="svc-card reveal" style="transition-delay:' + (i * 0.04) + 's" onclick="openSvcModal(' + idx + ')">' +
+            '<div class="svc-icon"><i class="fas ' + s.icon + '"></i></div>' +
+            '<h3 class="svc-name">' + s.name + '</h3>' +
+            '<p class="svc-desc">' + s.desc + '</p>' +
+            '<div class="svc-price">&#8377;' + s.price.toLocaleString() + ' &bull; ' + s.dur + '</div>' +
+            '<div class="svc-actions">' +
+            '<button class="svc-btn" onclick="event.stopPropagation();openSvcModal(' + idx + ')">Book</button>' +
+            '<button class="svc-btn cart-add" onclick="event.stopPropagation();addToCart(' + idx + ')"><i class="fas fa-plus"></i> Add</button>' +
+            '</div></div>';
+    }).join('');
+    const wrap = document.getElementById('showMoreWrap');
+    wrap.style.display = filtered.length > INIT_SHOW ? 'block' : 'none';
+    document.getElementById('showMoreBtn').textContent = showAll ? 'Show Less' : 'Show All ' + filtered.length + ' Services';
+    setTimeout(() => grid.querySelectorAll('.reveal').forEach(e => e.classList.add('vis')), 50);
 }
 
-function toggleShowMore(){showAll=!showAll;const act=document.querySelector('.svc-cat-btn.active');renderServices(act?act.dataset.cat:'All')}
-
-function openSvcModal(idx){
-    currentModalIdx=idx;const s=SERVICES[idx];
-    document.getElementById('smIcon').innerHTML=`<i class="fas ${s.icon}"></i>`;
-    document.getElementById('smName').textContent=s.name;
-    document.getElementById('smPrice').textContent='₹'+s.price.toLocaleString();
-    document.getElementById('smDur').textContent=s.dur;
-    document.getElementById('smCat').textContent=s.cat;
-    document.getElementById('smDesc').textContent=s.desc;
-    const today=new Date().toISOString().split('T')[0];
-    document.getElementById('smDate').min=today;document.getElementById('smDate').value='';
-    document.getElementById('smTime').value='';document.getElementById('smCustomerName').value='';
-    document.getElementById('smPhone').value='';document.getElementById('smNotes').value='';
-    initTimeSlots('smTimeSlots','smTime');
-    document.getElementById('svcModalOverlay').classList.add('show');document.body.style.overflow='hidden';
-}
-function closeSvcModal(){document.getElementById('svcModalOverlay').classList.remove('show');document.body.style.overflow='';currentModalIdx=null}
-function addToBookingFromModal(){if(currentModalIdx===null)return;addToCart(currentModalIdx);closeSvcModal()}
-function bookNowFromModal(){
-    if(currentModalIdx===null)return;const s=SERVICES[currentModalIdx];
-    const date=document.getElementById('smDate').value,time=document.getElementById('smTime').value,name=document.getElementById('smCustomerName').value.trim(),phone=document.getElementById('smPhone').value.trim(),notes=document.getElementById('smNotes').value.trim();
-    if(!name){showToast('Please enter your name.','warning');return}
-    if(!phone){showToast('Please enter your phone number.','warning');return}
-    if(!date){showToast('Please select a date.','warning');return}
-    if(!time){showToast('Please select a time slot.','warning');return}
-    const bookingId='VR'+Date.now().toString(36).toUpperCase();
-    const booking={bookingId,customerName:name,phoneNumber:phone,email:'',selectedServices:[{name:s.name,price:s.price,duration:s.dur,category:s.cat}],manualService:'',totalAmount:s.price,appointmentDate:date,appointmentTime:time,notes,bookingStatus:'pending',createdAt:new Date().toISOString()};
-    saveBooking(booking);closeSvcModal();showSuccess(booking);
+function toggleShowMore() {
+    showAll = !showAll;
+    const a = document.querySelector('.svc-cat-btn.active');
+    renderServices(a ? a.dataset.cat : 'All');
 }
 
-function addToCart(idx){const s=SERVICES[idx];if(cart.find(c=>c.name===s.name)){showToast(`${s.name} is already in your cart.`,'warning');return}cart.push({name:s.name,price:s.price,dur:s.dur,cat:s.cat,idx});localStorage.setItem('vrCart',JSON.stringify(cart));updateCartUI();showToast(`${s.name} added to booking!`,'success')}
-function removeFromCart(name){cart=cart.filter(c=>c.name!==name);localStorage.setItem('vrCart',JSON.stringify(cart));updateCartUI();showToast('Service removed.','info')}
-
-function updateCartUI(){
-    const badge=document.getElementById('cartBadge');badge.textContent=cart.length;badge.classList.toggle('visible',cart.length>0);
-    const itemsEl=document.getElementById('cartItems'),totalEl=document.getElementById('cartTotal');
-    const bkSummary=document.getElementById('bookingCartSummary'),bkList=document.getElementById('bookingCartList'),bkTotal=document.getElementById('bkTotal'),svcNote=document.getElementById('svcNote');
-    const total=cart.reduce((a,c)=>a+c.price,0);
-    if(cart.length===0){itemsEl.innerHTML='<div class="cart-empty"><i class="fas fa-shopping-bag"></i>Your booking cart is empty.<br>Add services to get started!</div>'}
-    else{itemsEl.innerHTML=cart.map(c=>`<div class="cart-item"><div class="cart-item-info"><h4>${c.name}</h4><span>₹${c.price.toLocaleString()} • ${c.dur}</span></div><button class="cart-item-remove" onclick="removeFromCart('${c.name}')"><i class="fas fa-times"></i></button></div>`).join('')}
-    totalEl.textContent='₹'+total.toLocaleString();
-    bkSummary.classList.toggle('has-items',cart.length>0);
-    if(cart.length>0){bkList.innerHTML=cart.map(c=>`<div class="booking-cart-tag">${c.name} — ₹${c.price.toLocaleString()} <button onclick="removeFromCart('${c.name}')"><i class="fas fa-times"></i></button></div>`).join('');bkTotal.innerHTML=`Total: <b>₹${total.toLocaleString()}</b>`;svcNote.textContent='Services selected from cart will be used automatically.'}
-    else{svcNote.textContent='Or add services from service cards above'}
+/* ===== SERVICE MODAL ===== */
+function openSvcModal(idx) {
+    currentModalIdx = idx;
+    const s = SERVICES[idx];
+    document.getElementById('smIcon').innerHTML = '<i class="fas ' + s.icon + '"></i>';
+    document.getElementById('smName').textContent = s.name;
+    document.getElementById('smPrice').innerHTML = '&#8377;' + s.price.toLocaleString();
+    document.getElementById('smDur').textContent = s.dur;
+    document.getElementById('smCat').textContent = s.cat;
+    document.getElementById('smDesc').textContent = s.desc;
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('smDate').min = today;
+    document.getElementById('smDate').value = '';
+    document.getElementById('smTime').value = '';
+    document.getElementById('smCustomerName').value = '';
+    document.getElementById('smPhone').value = '';
+    document.getElementById('smNotes').value = '';
+    initTimeSlots('smTimeSlots', 'smTime');
+    document.getElementById('svcModalOverlay').classList.add('show');
+    document.body.style.overflow = 'hidden';
 }
-function toggleCart(){document.getElementById('cartSidebar').classList.toggle('open');document.getElementById('cartOverlay').classList.toggle('show')}
-function cartCheckout(){toggleCart();document.getElementById('booking').scrollIntoView({behavior:'smooth'})}
-
-function initTimeSlots(cId,hId){const c=document.getElementById(cId);c.innerHTML=TIME_SLOTS.map(t=>`<button type="button" class="m-time-slot" onclick="selectSlot(this,'${t}','${hId}')">${t}</button>`).join('')}
-function selectSlot(el,t,hId){el.parentElement.querySelectorAll('.m-time-slot').forEach(s=>s.classList.remove('sel'));el.classList.add('sel');document.getElementById(hId).value=t}
-
-function populateBookingSelect(){const sel=document.getElementById('bkService');SERVICES.forEach(s=>{const o=document.createElement('option');o.value=s.name;o.textContent=`${s.name} — ₹${s.price.toLocaleString()}`;sel.appendChild(o)});initTimeSlots('bkTimeSlots','bkTime')}
-
-function handleBooking(e){
-    e.preventDefault();const name=document.getElementById('bkName').value.trim(),phone=document.getElementById('bkPhone').value.trim(),email=document.getElementById('bkEmail').value.trim(),date=document.getElementById('bkDate').value,time=document.getElementById('bkTime').value,manualService=document.getElementById('bkService').value,notes=document.getElementById('bkNotes').value.trim();
-    if(!name){showToast('Please enter your full name.','warning');return}
-    if(!phone){showToast('Please enter your phone number.','warning');return}
-    if(!date){showToast('Please select an appointment date.','warning');return}
-    if(!time){showToast('Please select a time slot.','warning');return}
-    if(cart.length===0&&!manualService){showToast('Please select at least one salon service before booking your appointment.','error',5000);return}
-    let selectedServices=[],totalAmount=0;
-    if(cart.length>0){selectedServices=cart.map(c=>({name:c.name,price:c.price,duration:c.dur,category:c.cat}));totalAmount=cart.reduce((a,c)=>a+c.price,0)}
-    if(manualService){const svc=SERVICES.find(s=>s.name===manualService);if(svc&&!selectedServices.find(ss=>ss.name===svc.name)){selectedServices.push({name:svc.name,price:svc.price,duration:svc.dur,category:svc.cat});totalAmount+=svc.price}}
-    const bookingId='VR'+Date.now().toString(36).toUpperCase();
-    const booking={bookingId,customerName:name,phoneNumber:phone,email,selectedServices,manualService:manualService||'',totalAmount,appointmentDate:date,appointmentTime:time,notes,bookingStatus:'pending',createdAt:new Date().toISOString()};
-    saveBooking(booking);cart=[];localStorage.setItem('vrCart',JSON.stringify(cart));updateCartUI();e.target.reset();document.querySelectorAll('.m-time-slot,.time-slot').forEach(s=>s.classList.remove('sel'));document.getElementById('bkTime').value='';showSuccess(booking);
+function closeSvcModal() {
+    document.getElementById('svcModalOverlay').classList.remove('show');
+    document.body.style.overflow = '';
+    currentModalIdx = null;
 }
-
-function saveBooking(b){const bk=JSON.parse(localStorage.getItem('vrBookings'))||[];bk.push(b);localStorage.setItem('vrBookings',JSON.stringify(bk));console.log('📋 Booking Data:',JSON.stringify(b,null,2))}
-
-function showSuccess(b){
-    document.getElementById('successId').textContent='Booking ID: #'+b.bookingId;
-    let s=`<strong>Customer:</strong> ${b.customerName}<br><strong>Phone:</strong> ${b.phoneNumber}<br><strong>Date:</strong> ${b.appointmentDate}<br><strong>Time:</strong> ${b.appointmentTime}<br><strong>Services:</strong> ${b.selectedServices.map(s=>s.name).join(', ')}<br><strong>Total:</strong> ₹${b.totalAmount.toLocaleString()}`;
-    document.getElementById('successSummary').innerHTML=s;document.getElementById('successOverlay').classList.add('show');document.body.style.overflow='hidden';showToast('Appointment booked successfully! 🎉','success',5000);
+function addToBookingFromModal() {
+    if (currentModalIdx !== null) addToCart(currentModalIdx);
+    closeSvcModal();
 }
-function closeSuccess(){document.getElementById('successOverlay').classList.remove('show');document.body.style.overflow=''}
-
-function initWhyMarquee(){const t=document.getElementById('whyMarquee');const items=WHY_DATA.map(w=>`<div class="why-card"><i class="fas ${w.icon}"></i><h4>${w.title}</h4><p>${w.desc}</p></div>`).join('');t.innerHTML=items+items}
-function initCounterMarquee(){const t=document.getElementById('counterTrack');const items=COUNTERS.map(c=>`<div class="counter-item"><div class="counter-num">${c.num}</div><div class="counter-label">${c.label}</div></div><div class="counter-dot"></div>`).join('');t.innerHTML=items+items+items}
-
-function initGallery(){
-    // Desktop grid
-    document.getElementById('galleryGrid').innerHTML=GALLERY.map((g,i)=>`<div class="gallery-item reveal" style="transition-delay:${i*0.07}s" onclick="openLb('${g.title}')"><div class="gallery-bg"><i class="fas ${g.icon}"></i></div><div class="gallery-ov"><div class="gallery-expand"><i class="fas fa-expand"></i></div><h4>${g.title}</h4><span>${g.cat}</span></div></div>`).join('');
-    // Mobile carousel
-    const mc=document.getElementById('galleryMobileCarousel');
-    const items=GALLERY.map(g=>`<div class="gallery-carousel-item" onclick="openLb('${g.title}')"><div class="gallery-bg"><i class="fas ${g.icon}"></i></div><div class="gallery-ov"><h4>${g.title}</h4><span>${g.cat}</span></div></div>`).join('');
-    mc.innerHTML=`<div class="gallery-carousel-track">${items}${items}</div>`;
+function bookNowFromModal() {
+    if (currentModalIdx === null) return;
+    const s = SERVICES[currentModalIdx];
+    const date = document.getElementById('smDate').value;
+    const time = document.getElementById('smTime').value;
+    const name = document.getElementById('smCustomerName').value.trim();
+    const phone = document.getElementById('smPhone').value.trim();
+    const notes = document.getElementById('smNotes').value.trim();
+    if (!name) { showToast('Please enter your name.', 'warning'); return; }
+    if (!phone) { showToast('Please enter your phone number.', 'warning'); return; }
+    if (!date) { showToast('Please select a date.', 'warning'); return; }
+    if (!time) { showToast('Please select a time slot.', 'warning'); return; }
+    const bookingId = 'VR' + Date.now().toString(36).toUpperCase();
+    const booking = {bookingId, customerName:name, phoneNumber:phone, email:'', selectedServices:[{name:s.name,price:s.price,duration:s.dur,category:s.cat}], totalAmount:s.price, appointmentDate:date, appointmentTime:time, notes, bookingStatus:'pending', createdAt:new Date().toISOString()};
+    saveBooking(booking);
+    closeSvcModal();
+    showSuccess(booking);
 }
 
-function openLb(t){document.getElementById('lbTitle').textContent=t;document.getElementById('lightbox').classList.add('show');document.body.style.overflow='hidden'}
-function closeLb(){document.getElementById('lightbox').classList.remove('show');document.body.style.overflow=''}
-document.getElementById('lightbox').addEventListener('click',e=>{if(e.target===document.getElementById('lightbox'))closeLb()});
+/* ===== CART ===== */
+function addToCart(idx) {
+    const s = SERVICES[idx];
+    if (cart.find(c => c.name === s.name)) { showToast(s.name + ' is already in your cart.', 'warning'); return; }
+    cart.push({name:s.name, price:s.price, dur:s.dur, cat:s.cat, idx});
+    localStorage.setItem('vrCart', JSON.stringify(cart));
+    updateCartUI();
+    showToast(s.name + ' added to booking!', 'success');
+}
+function removeFromCart(name) {
+    cart = cart.filter(c => c.name !== name);
+    localStorage.setItem('vrCart', JSON.stringify(cart));
+    updateCartUI();
+    showToast('Service removed.', 'info');
+}
+function updateCartUI() {
+    const badge = document.getElementById('cartBadge');
+    badge.textContent = cart.length;
+    badge.classList.toggle('visible', cart.length > 0);
+    const total = cart.reduce((a, c) => a + c.price, 0);
+    const ci = document.getElementById('cartItems');
+    if (cart.length === 0) {
+        ci.innerHTML = '<div class="cart-empty"><i class="fas fa-shopping-bag"></i>Your booking cart is empty.<br>Add services to get started!</div>';
+    } else {
+        ci.innerHTML = cart.map(c => '<div class="cart-item"><div class="cart-item-info"><h4>' + c.name + '</h4><span>&#8377;' + c.price.toLocaleString() + ' &bull; ' + c.dur + '</span></div><button class="cart-item-remove" onclick="removeFromCart(\'' + c.name + '\')"><i class="fas fa-times"></i></button></div>').join('');
+    }
+    document.getElementById('cartTotal').innerHTML = '&#8377;' + total.toLocaleString();
+    const bs = document.getElementById('bookingCartSummary');
+    const bl = document.getElementById('bookingCartList');
+    const bt = document.getElementById('bkTotal');
+    const sn = document.getElementById('svcNote');
+    bs.classList.toggle('has-items', cart.length > 0);
+    if (cart.length > 0) {
+        bl.innerHTML = cart.map(c => '<div class="booking-cart-tag">' + c.name + ' — &#8377;' + c.price.toLocaleString() + ' <button onclick="removeFromCart(\'' + c.name + '\')"><i class="fas fa-times"></i></button></div>').join('');
+        bt.innerHTML = 'Total: <b>&#8377;' + total.toLocaleString() + '</b>';
+        sn.textContent = 'Services selected from cart will be used automatically.';
+    } else {
+        sn.textContent = 'Or add services from service cards above';
+    }
+}
+function toggleCart() {
+    document.getElementById('cartSidebar').classList.toggle('open');
+    document.getElementById('cartOverlay').classList.toggle('show');
+}
+function cartCheckout() {
+    toggleCart();
+    document.getElementById('booking').scrollIntoView({behavior:'smooth'});
+}
 
-function initReviewMarquee(){const t=document.getElementById('reviewTrack');const cards=REVIEWS.map(r=>`<div class="review-card"><span class="review-quote">"</span><div class="review-stars">★ ★ ★ ★ ★</div><p class="review-text">${r.text}</p><div class="review-author"><div class="review-avatar">${r.init}</div><div class="review-info"><h4>${r.name}</h4><span>Verified Client</span></div></div></div>`).join('');t.innerHTML=cards+cards}
+/* ===== TIME SLOTS ===== */
+function initTimeSlots(cId, hId) {
+    document.getElementById(cId).innerHTML = TIME_SLOTS.map(t => '<button type="button" class="m-time-slot" onclick="selectSlot(this,\'' + t + '\',\'' + hId + '\')">' + t + '</button>').join('');
+}
+function selectSlot(el, t, hId) {
+    el.parentElement.querySelectorAll('.m-time-slot').forEach(s => s.classList.remove('sel'));
+    el.classList.add('sel');
+    document.getElementById(hId).value = t;
+}
 
-document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'})})});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeSvcModal();closeLb();closeSuccess();if(document.getElementById('cartSidebar').classList.contains('open'))toggleCart()}});
-document.getElementById('svcModalOverlay').addEventListener('click',e=>{if(e.target===document.getElementById('svcModalOverlay'))closeSvcModal()});
-document.getElementById('successOverlay').addEventListener('click',e=>{if(e.target===document.getElementById('successOverlay'))closeSuccess()});
+/* ===== BOOKING SELECT ===== */
+function populateBookingSelect() {
+    const sel = document.getElementById('bkService');
+    SERVICES.forEach(s => {
+        const o = document.createElement('option');
+        o.value = s.name;
+        o.textContent = s.name + ' — ₹' + s.price.toLocaleString();
+        sel.appendChild(o);
+    });
+    initTimeSlots('bkTimeSlots', 'bkTime');
+}
+
+/* ===== MAIN BOOKING — Smart multi-service logic ===== */
+function handleBooking(e) {
+    e.preventDefault();
+    const name = document.getElementById('bkName').value.trim();
+    const phone = document.getElementById('bkPhone').value.trim();
+    const email = document.getElementById('bkEmail').value.trim();
+    const date = document.getElementById('bkDate').value;
+    const time = document.getElementById('bkTime').value;
+    const manualService = document.getElementById('bkService').value;
+    const notes = document.getElementById('bkNotes').value.trim();
+    if (!name) { showToast('Please enter your full name.', 'warning'); return; }
+    if (!phone) { showToast('Please enter your phone number.', 'warning'); return; }
+    if (!date) { showToast('Please select an appointment date.', 'warning'); return; }
+    if (!time) { showToast('Please select a time slot.', 'warning'); return; }
+    if (!cart.length && !manualService) { showToast('Please select at least one salon service before booking your appointment.', 'error', 5000); return; }
+    let selectedServices = [];
+    let totalAmount = 0;
+    if (cart.length > 0) {
+        selectedServices = cart.map(c => ({name:c.name, price:c.price, duration:c.dur, category:c.cat}));
+        totalAmount = cart.reduce((a, c) => a + c.price, 0);
+    }
+    if (manualService) {
+        const svc = SERVICES.find(s => s.name === manualService);
+        if (svc && !selectedServices.find(ss => ss.name === svc.name)) {
+            selectedServices.push({name:svc.name, price:svc.price, duration:svc.dur, category:svc.cat});
+            totalAmount += svc.price;
+        }
+    }
+    const bookingId = 'VR' + Date.now().toString(36).toUpperCase();
+    const booking = {bookingId, customerName:name, phoneNumber:phone, email, selectedServices, manualService:manualService||'', totalAmount, appointmentDate:date, appointmentTime:time, notes, bookingStatus:'pending', createdAt:new Date().toISOString()};
+    saveBooking(booking);
+    cart = [];
+    localStorage.setItem('vrCart', JSON.stringify(cart));
+    updateCartUI();
+    e.target.reset();
+    document.querySelectorAll('.m-time-slot,.time-slot').forEach(s => s.classList.remove('sel'));
+    document.getElementById('bkTime').value = '';
+    showSuccess(booking);
+}
+
+/* ===== SAVE BOOKING (Backend-Ready) ===== */
+function saveBooking(b) {
+    /* --- localStorage (dev/demo) --- */
+    const bks = JSON.parse(localStorage.getItem('vrBookings')) || [];
+    bks.push(b);
+    localStorage.setItem('vrBookings', JSON.stringify(bks));
+    console.log('Booking Data (Backend-Ready):', JSON.stringify(b, null, 2));
+    /*
+    // --- REST API / Firebase Integration ---
+    fetch('/api/book-appointment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(b)
+    });
+    */
+}
+
+/* ===== SUCCESS ===== */
+function showSuccess(b) {
+    document.getElementById('successId').textContent = 'Booking ID: #' + b.bookingId;
+    document.getElementById('successSummary').innerHTML =
+        '<strong>Customer:</strong> ' + b.customerName + '<br>' +
+        '<strong>Phone:</strong> ' + b.phoneNumber + '<br>' +
+        '<strong>Date:</strong> ' + b.appointmentDate + '<br>' +
+        '<strong>Time:</strong> ' + b.appointmentTime + '<br>' +
+        '<strong>Services:</strong> ' + b.selectedServices.map(s => s.name).join(', ') + '<br>' +
+        '<strong>Total:</strong> &#8377;' + b.totalAmount.toLocaleString();
+    document.getElementById('successOverlay').classList.add('show');
+    document.body.style.overflow = 'hidden';
+    showToast('Appointment booked successfully!', 'success', 5000);
+}
+function closeSuccess() {
+    document.getElementById('successOverlay').classList.remove('show');
+    document.body.style.overflow = '';
+}
+
+/* ===== WHY MARQUEE ===== */
+function initWhyMarquee() {
+    const t = document.getElementById('whyMarquee');
+    const h = WHY_DATA.map(w => '<div class="why-card"><i class="fas ' + w.icon + '"></i><h4>' + w.title + '</h4><p>' + w.desc + '</p></div>').join('');
+    t.innerHTML = h + h;
+}
+
+/* ===== COUNTER MARQUEE ===== */
+function initCounterMarquee() {
+    const t = document.getElementById('counterTrack');
+    const h = COUNTERS.map(c => '<div class="counter-item"><div class="counter-num">' + c.num + '</div><div class="counter-label">' + c.label + '</div></div><div class="counter-dot"></div>').join('');
+    t.innerHTML = h + h + h;
+}
+
+/* ===== GALLERY — Real Transformation Images ===== */
+function initGallery() {
+    /* Desktop grid */
+    const grid = document.getElementById('galleryGrid');
+    grid.innerHTML = GALLERY_DATA.map((img, i) =>
+        '<div class="gallery-item reveal" style="transition-delay:' + (i * 0.07) + 's" onclick="openLb(' + i + ')">' +
+        '<img src="' + img.src + '" alt="' + img.title + '" loading="lazy">' +
+        '<div class="gallery-ov"><div class="gallery-expand"><i class="fas fa-expand"></i></div><h4>' + img.title + '</h4><span>' + img.cat + '</span></div>' +
+        '</div>'
+    ).join('');
+
+    /* Mobile horizontal carousel */
+    const mc = document.getElementById('galleryMobileCarousel');
+    const mItems = GALLERY_DATA.map((img, i) =>
+        '<div class="gallery-carousel-item" onclick="openLb(' + i + ')">' +
+        '<img src="' + img.src + '" alt="' + img.title + '" loading="lazy">' +
+        '<div class="g-ov"><h4>' + img.title + '</h4><span>' + img.cat + '</span></div>' +
+        '</div>'
+    ).join('');
+    mc.innerHTML = '<div class="gallery-carousel-track">' + mItems + mItems + '</div>';
+}
+
+/* ===== LIGHTBOX with Navigation ===== */
+function openLb(i) {
+    lbIndex = i;
+    document.getElementById('lbImage').src = GALLERY_DATA[i].src;
+    document.getElementById('lbImage').alt = GALLERY_DATA[i].title;
+    document.getElementById('lightbox').classList.add('show');
+    document.body.style.overflow = 'hidden';
+}
+function closeLb() {
+    document.getElementById('lightbox').classList.remove('show');
+    document.body.style.overflow = '';
+}
+function lbNav(dir) {
+    lbIndex = (lbIndex + dir + GALLERY_DATA.length) % GALLERY_DATA.length;
+    document.getElementById('lbImage').src = GALLERY_DATA[lbIndex].src;
+    document.getElementById('lbImage').alt = GALLERY_DATA[lbIndex].title;
+}
+document.getElementById('lightbox').addEventListener('click', e => { if (e.target === document.getElementById('lightbox')) closeLb(); });
+
+/* ===== REVIEWS MARQUEE ===== */
+function initReviewMarquee() {
+    const t = document.getElementById('reviewTrack');
+    const h = REVIEWS.map(r =>
+        '<div class="review-card"><span class="review-quote">&ldquo;</span>' +
+        '<div class="review-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>' +
+        '<p class="review-text">' + r.text + '</p>' +
+        '<div class="review-author"><div class="review-avatar">' + r.init + '</div>' +
+        '<div class="review-info"><h4>' + r.name + '</h4><span>Verified Client</span></div></div></div>'
+    ).join('');
+    t.innerHTML = h + h;
+}
+
+/* ===== SMOOTH SCROLL ===== */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
+        e.preventDefault();
+        const t = document.querySelector(this.getAttribute('href'));
+        if (t) t.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+});
+
+/* ===== KEYBOARD ===== */
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+        closeSvcModal();
+        closeLb();
+        closeSuccess();
+        if (document.getElementById('cartSidebar').classList.contains('open')) toggleCart();
+    }
+    if (document.getElementById('lightbox').classList.contains('show')) {
+        if (e.key === 'ArrowLeft') lbNav(-1);
+        if (e.key === 'ArrowRight') lbNav(1);
+    }
+});
+document.getElementById('svcModalOverlay').addEventListener('click', e => { if (e.target === document.getElementById('svcModalOverlay')) closeSvcModal(); });
+document.getElementById('successOverlay').addEventListener('click', e => { if (e.target === document.getElementById('successOverlay')) closeSuccess(); });
 </script>
 </body>
 </html>
